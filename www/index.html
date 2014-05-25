@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html ng-app="ionicApp">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>Todo List App</title>
+
+        <!-- ionic css -->
+        <link href="css/ionic.min.css" rel="stylesheet">
+
+        <!-- ionic/angularjs scripts -->
+        <script src="js/ionic.bundle.min.js"></script>
+        
+        <script src="cordova.js"></script>
+        
+        <!-- Local-storage-angular -->
+        <script src="js/angular-local-storage.min.js"></script>
+        <!-- your app's script -->
+        <script src="js/script.js"></script>
+    </head>
+
+    <body ng-controller="MyCtrl">
+        <header class="bar bar-header bar-positive">
+            <div class="buttons">
+                <button class="button button-icon icon ion-ios7-minus-outline" ng-click="showDelete = !showDelete"></button>
+                <h1 class="title" ng-model="testme">Todo List</h1>
+                <button class="button button-icon icon  ion-ios7-plus-outline" ng-click="addItem()"></button>
+            </div>
+            
+            <!--<button  class="button button-icon icon ion-ios7-bolt" ng-click="clearItems()"></button> -->
+           <!-- <button  class="button button-icon icon ion-loading-b" ng-click="onReload()"></button> -->
+            
+            <div class="fb-share-button" data-href="https://play.google.com/store/apps/details?id=org.dayup.gtask" data-type="button_count"></div>
+            
+        </header>
+
+    <ion-content class="has-header">
+
+        <ion-list show-delete="showDelete"
+                  on-delete="onItemDelete(item)"
+                  option-buttons="itemButtons">
+
+            <ion-item ng-repeat="item in items" 
+                      ng-click ="editItem(item)"
+                      item="item"
+                      href="#/item/{{item.id}}">
+                <h2 align="left">{{ item.name}}</h2>
+                <h3 align="right"> Date: {{item.date}} Time: {{item.time}}</h3>
+            </ion-item>  
+        </ion-list>
+
+ <!-- <div class="card" ng-repeat="item in items">
+  <div class="item item-divider">
+    {{item.name}}
+  </div>
+  <div class="item item-text-wrap">
+    Date: {{item.date}} Time: {{item.time}}
+  </div>
+ --> 
+
+</div>
+    </ion-content>
+    
+    <div id="fb-root"></div>
+
+
+    <script type="text/ng-template" id="test1.html">
+<div class="modal" ng-view>
+    <header class="bar bar-header bar-positive">
+      <h1 class="title">New Task</h1>
+      <button class="button button-clear button-positive" ng-click="closeModal()">Cancel</button>
+    </header>
+    <ion-content has-header="true" padding="true">
+        <div class="list item-inset">
+          <label class="item list-input">
+            <span class="input-label">Task description</span>
+            <input type="text" placeholder="" ng-model="Myname">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Set Date</span>
+            <input type="text" placeholder="" ng-model="date" ng-click="getMyDate()">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Set Time</span>
+            <input type="text" placeholder="" ng-model="time" ng-click="getMyTime()">
+          </label>
+          <label class="item item-input">
+          <button class="button button-full button-positive" ng-click="createNewTask()">Create</button>
+        </div>
+      </div>
+    </script>
+    
+        <script type="text/ng-template" id="edit.html">
+<div class="modal" ng-view>
+    <header class="bar bar-header bar-positive">
+      <h1 class="title">Edit Task</h1>
+      <button class="button button-clear button-positive" ng-click="closeModal()">Cancel</button>
+    </header>
+    <ion-content has-header="true" padding="true">
+        <div class="list item-inset">
+          <label class="item list-input">
+            <span class="input-label">Task description</span>
+            <input type="text" ng-model="EditName">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Set Date</span>
+            <input type="text" placeholder="" ng-model="date" ng-click="getMyDate()">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Set Time</span>
+            <input type="text" placeholder="" ng-model="time" ng-click="getMyTime()">
+          </label>
+          <label class="item item-input">
+          <button class="button button-full button-positive" ng-click="editTask()">Done</button>
+        </div>
+      </div>
+    </script>
+</body>
+</html>
